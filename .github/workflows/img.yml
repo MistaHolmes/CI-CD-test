@@ -11,11 +11,13 @@ jobs:
       - name: Repo-Clone
         uses: actions/checkout@v5
       
-      - name: Docker-Pull
-        uses: docker/login-actions@v3
+      - name: Testing Vars
         run: |
           echo "This is ${{vars.DOCKER_USERNAME}}'s repository"
           echo "This is the PAT ${{secrets.DOCKER_PAT}}"
+          
+      - name: Docker-Pull
+        uses: docker/login-actions@v3
         with: 
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PAT }}
