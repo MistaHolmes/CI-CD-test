@@ -16,14 +16,14 @@ jobs:
           echo "This is ${{vars.DOCKER_USERNAME}}'s repository"
           echo "This is the PAT ${{secrets.DOCKER_PAT}}"
 
-      - name: Docker-Pull
+      - name: Docker-Login
         uses: docker/login-action@v3
         with: 
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PAT }}
       
       - name: Docker-Build
-        run: docker build -t ${{vars.DOCKER_USERNAME}}/CI-CD_Test:latest .
+        run: docker build -t ${{vars.DOCKER_USERNAME}}/ci-cd_test:latest .
       
       - name: Docker-Push
-        run: docker push ${{ vars.DOCKER_USERNAME }}/CI-CD_Test:latest
+        run: docker push ${{ vars.DOCKER_USERNAME }}/ci-cd_test:latest
