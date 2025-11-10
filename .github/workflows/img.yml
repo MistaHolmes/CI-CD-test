@@ -1,0 +1,27 @@
+name: Building-Tests
+
+on: 
+  push:
+    branches: [main]
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Repo-Clone
+        uses: actions/checkout@v5
+      
+      - name: Docker-Pull
+        uses: docker/login-actions@v3
+        run: |
+          echo "This is ${{vars.DOCKER_USERNAME}}'s repository"
+          echo "This is the PAT ${{secrets.DOCKER_PAT}}"
+        with: 
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PAT }}
+      
+      - name: Docker-Build
+        run: docker build -t ${{vars.DOCKER_USERNAME}}/CI-CD_Test:latest .
+      
+      - name: Docker-Push
+        run: docker push ${{ var.DOCKER_USERNAME }}/CI-CD_Test:latest
