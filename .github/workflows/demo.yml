@@ -1,0 +1,30 @@
+name: Push-events
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Basic-echo
+        shell: bash # Will need to acutally specify for windows [pwsh,cmd,zsh]
+        run: |
+          echo "$GITHUB_WORKSPACE"
+          echo "The repository is: ${{ github.repository }}"
+          echo "Secrets: ${{ secrets.ENV_TEST }}"
+
+  test-2: 
+    runs-on: macos-latest
+
+    steps: 
+      - name: Testing concurrency
+        run: |
+          echo "In MacOs"
+          exit 0
