@@ -1,0 +1,20 @@
+services:
+  api:
+    build: .
+    container_name: con-2-api
+    ports:
+      - "3002:3002"          # public API
+    env_file:
+      - .env
+    environment:
+      AUTH_SERVICE_URL: http://auth:8080
+    depends_on:
+      - auth
+
+  auth:
+    build: ./sidecars/auth
+    container_name: con-2-auth
+    env_file:
+      - .env
+    expose:
+      - "8080"               # internal only
