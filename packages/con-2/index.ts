@@ -20,7 +20,7 @@ app.post("/login", async (req, res) => {
   const { email } = req.body;
 
   const response = await fetch(
-    `${process.env.AUTH_SERVICE_URL}/token`, 
+    `${AUTH_SERVICE_URL}/token`, 
     {
     method: "POST",
     headers: { "content-type": "application/json" },
